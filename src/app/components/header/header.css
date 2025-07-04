@@ -16,6 +16,27 @@
     list-style: none;
 }
 
+.btn-icon {
+    padding: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-icon svg {
+    display: block;
+    color: var(--text-primary, #333);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .header {
