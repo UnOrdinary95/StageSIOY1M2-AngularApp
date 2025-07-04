@@ -1,0 +1,33 @@
+.header {
+    background-color: var(--bg-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing3) var(--spacing4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+.header nav li {
+    list-style: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        padding: var(--spacing2) var(--spacing3);
+    }
+
+    .header nav ul {
+        gap: var(--spacing2);
+    }
+
+    .header .btn {
+        padding: var(--spacing1) var(--spacing2);
+        font-size: var(--fs-small);
+    }
+}

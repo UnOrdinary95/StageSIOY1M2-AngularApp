@@ -1,0 +1,24 @@
+.footer {
+    margin-top: auto;
+    padding: var(--spacing4) var(--spacing3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer p {
+    margin: 0;
+    font-size: var(--fs-small);
+    user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: var(--spacing3) var(--spacing2);
+        flex-direction: column;
+        gap: var(--spacing2);
+    }
+
+    .footer p {
+        font-size: var(--fs-caption);
+    }
+}

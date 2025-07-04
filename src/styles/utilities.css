@@ -1,0 +1,198 @@
+.test{
+    border: 1px solid red;
+}
+
+.spacing{
+    padding-block: var(--spacing2);
+}
+
+.w50{
+    width: 50%;
+}
+
+.w100{
+    width: 100%;
+}
+
+.gap1{
+    gap: var(--spacing1);
+}
+
+.gap2{
+    gap: var(--spacing2);
+}
+
+.gap3{
+    gap: var(--spacing3);
+}
+
+.gap4{
+    gap: var(--spacing4);
+}
+
+.gap5{
+    gap: var(--spacing5);
+}
+
+.gap6{
+    gap: var(--spacing6);
+}
+
+.gap7{
+    gap: var(--spacing7);
+}
+
+.bg-white{
+    background-color: var(--bg-light);
+}
+
+.bg-dark{
+    background-color: var(--bg-dark);
+}
+
+.light{
+    color: var(--text-light-primary);
+}
+
+.dark{
+    color: var(--text-dark-primary);
+}
+
+.light-secondary{
+    color: var(--text-light-secondary);
+}
+
+.dark-secondary{
+    color: var(--text-dark-secondary);
+}
+
+.primary{
+    color: var(--color-primary);
+}
+
+.secondary{
+    color: var(--color-secondary);
+}
+
+.primary-hover{
+    color: var(--color-primary-hover);
+}
+
+.secondary-hover{
+    color: var(--color-secondary-hover);
+}
+
+.gradient{
+    background: var(--gradient-main);
+}
+
+.bold{
+    font-weight: var(--fw-bold);
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.center{
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-end {
+    align-items: flex-end;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+/* === Boutons === */
+.btn {
+    padding: var(--spacing2) var(--spacing3);
+    border: none;
+    border-radius: 6px;
+    font-size: var(--fs-p);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--text-light-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary);
+    color: var(--text-light-primary);
+}
+
+/* === Logos === */
+.logo {
+    width: 50px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo-small {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
