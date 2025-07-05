@@ -17,6 +17,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductModal {
     currentUser: User | null = null;
+    private hasUpdated = false; // Track si des modifications ont été faites
 
     constructor(
         private dialogRef: MatDialogRef<ProductModal>,
@@ -29,7 +30,11 @@ export class ProductModal {
     }
 
     closeModal() {
-        this.dialogRef.close();
+        this.dialogRef.close(this.hasUpdated); // Passe true si des modifications ont été faites
+    }
+
+    closeWithUpdate() {
+        this.dialogRef.close(true); // Indique qu'une mise à jour a eu lieu
     }
 
     loadCurrentUser(): void {
@@ -79,7 +84,9 @@ export class ProductModal {
             this.http.patch<User>(`http://localhost:3000/users/${tokenValue.userId}/cart`, { productId: this.product._id.toString() }, { headers }).subscribe({
                 next: (user: User) => {
                     console.log('Produit ajouté au panier:', this.product._id);
-                    this.loadCurrentUser(); // Reload user data to update UI
+                    this.loadCurrentUser();
+                    this.hasUpdated = true; // Marquer qu'une modification a été faite
+                    this.dialogRef.close('cart_updated'); // Indiquer spécifiquement que le panier a été mis à jour
                 },
                 error: (err) => {
                     console.error('Erreur ajout produit au panier', err);
@@ -105,7 +112,8 @@ export class ProductModal {
             this.http.patch<User>(`http://localhost:3000/users/${tokenValue.userId}/wishlist`, { productId: this.product._id.toString() }, { headers }).subscribe({
                 next: (user: User) => {
                     console.log('Produit ajouté à la wishlist:', this.product._id);
-                    this.loadCurrentUser(); // Reload user data to update UI
+                    this.loadCurrentUser();
+                    this.hasUpdated = true; // Marquer qu'une modification a été faite
                 },
                 error: (err) => {
                     console.error('Erreur ajout produit à la wishlist', err);

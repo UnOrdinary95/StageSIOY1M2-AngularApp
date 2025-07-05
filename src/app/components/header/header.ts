@@ -65,6 +65,28 @@ export class Header {
         return null;
     }
 
+    refreshUserData(): void {
+        const tokenValue = this.authService.getTokenDecoded();
+        const token = this.authService.getToken();
+
+        if (tokenValue && token) {
+            const headers = new HttpHeaders({
+                'Authorization': `Bearer ${token}`
+            });
+
+            this.http.get<User>(`http://localhost:3000/users/${tokenValue.userId}`, { headers }).subscribe({
+                next: (user: User) => {
+                    console.log("Données utilisateur mises à jour:", user);
+                    this.currentUser = user;
+                },
+                error: (err) => {
+                    console.error("Erreur lors de la mise à jour des données utilisateur", err);
+                    this.currentUser = null;
+                }
+            });
+        }
+    }
+
     getCartItemCount(): number {
         const user = this.getCurrentUser();
         console.log("Nombre d'articles dans le panier:", user?.cart.length || 0);

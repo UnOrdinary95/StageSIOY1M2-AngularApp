@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { Header } from './components/header/header';
@@ -21,6 +21,7 @@ import { ProductModal } from './modals/product-modal/product-modal';
 export class App implements OnInit {
     products: Product[] = [];
     currentUser: User | null = null;
+    @ViewChild(Header) headerComponent!: Header;
 
     constructor(private productService: ProductService, private authService: AuthService, private dialog: MatDialog, private http: HttpClient) { }
 
@@ -81,7 +82,9 @@ export class App implements OnInit {
             this.http.patch<User>(`http://localhost:3000/users/${tokenValue.userId}/cart`, { productId: idProduct }, { headers }).subscribe({
                 next: (user: User) => {
                     console.log('Produit ajouté au panier:', idProduct);
-                    window.location.reload();
+                    this.loadCurrentUser();
+                    // Mettre à jour le compteur du panier dans le header
+                    this.headerComponent.refreshUserData();
                 },
                 error: (err) => {
                     console.error('Erreur ajout produit au panier', err);
@@ -108,7 +111,9 @@ export class App implements OnInit {
             this.http.patch<User>(`http://localhost:3000/users/${tokenValue.userId}/wishlist`, { productId: idProduct }, { headers }).subscribe({
                 next: (user: User) => {
                     console.log('Produit ajouté au panier:', idProduct);
-                    window.location.reload();
+                    this.loadCurrentUser();
+                    // Mettre à jour le compteur du panier dans le header (au cas où la wishlist affecterait le panier)
+                    this.headerComponent.refreshUserData();
                 },
                 error: (err) => {
                     console.error('Erreur ajout produit au panier', err);
@@ -124,9 +129,27 @@ export class App implements OnInit {
     }
 
     openProductModal(product: Product) {
-        this.dialog.open(ProductModal, {
+        if (!this.authService.isLoggedIn()) {
+            console.error('Utilisateur non connecté, impossible d\'ouvrir le modal produit');
+            this.openLoginModal();
+            return;
+        }
+
+        const dialogRef = this.dialog.open(ProductModal, {
             width: '1200px',
             data: product
+        });
+
+        // Écouter la fermeture du modal et recharger les données utilisateur si nécessaire
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === true || result === 'cart_updated') {
+                // Le modal a indiqué qu'une mise à jour a eu lieu
+                this.loadCurrentUser();
+                // Mettre à jour spécifiquement le compteur du panier
+                if (result === 'cart_updated') {
+                    this.headerComponent.refreshUserData();
+                }
+            }
         });
     }
 }
