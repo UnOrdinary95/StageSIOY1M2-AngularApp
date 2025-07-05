@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
+import { TokenPayload } from '../interfaces/TokenPayload';
 
 @Injectable({
     providedIn: 'root'
@@ -21,4 +23,18 @@ export class AuthService {
     logout() {
         localStorage.removeItem(this.TOKEN_KEY);
     }
+
+    getTokenDecoded() {
+        const token = this.getToken();
+        if (!token) {
+            return null;
+        }
+        try {
+            return jwtDecode<TokenPayload>(token);
+        } catch (error) {
+            console.error('Invalid token', error);
+            return null;
+        }
+    }
+
 }

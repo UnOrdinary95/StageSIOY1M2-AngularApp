@@ -5,33 +5,96 @@
     <nav>
         <ul class="flex gap4">
             @if (!isLoggedIn) {
-                <!-- Utilisateur non connecté -->
-                <li>
-                    <button class="btn btn-secondary" (click)="openRegisterModal()">
-                        Inscription
-                    </button>
-                </li>
-                <li>
-                    <button class="btn btn-primary" (click)="openLoginModal()">
-                        Connexion
-                    </button>
-                </li>
+            <!-- Utilisateur non connecté -->
+            <li>
+                <button class="btn btn-secondary" (click)="openRegisterModal()">
+                    Inscription
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-primary" (click)="openLoginModal()">
+                    Connexion
+                </button>
+            </li>
             } @else {
-                <!-- Utilisateur connecté -->
-                <li>
-                    <button class="btn btn-icon" title="Profil">
-                        <!-- SVG Profil -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M20.5906 22C20.5906 18.13 16.7406 15 12.0006 15C7.26063 15 3.41063 18.13 3.41063 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Utilisateur connecté -->
+            <li>
+                <button class="btn btn-icon cart-button" title="Panier">
+                    <!-- SVG Panier -->
+                    <div class="cart-icon-container">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16.5 5.1 16.5H17M17 13V17C17 18.1 16.1 19 15 19H9C7.9 19 7 18.1 7 17V13H17Z"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <circle
+                                cx="9"
+                                cy="22"
+                                r="1"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <circle
+                                cx="20"
+                                cy="22"
+                                r="1"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
                         </svg>
-                    </button>
-                </li>
-                <li>
-                    <button class="btn btn-secondary" (click)="logout()">
-                        Déconnexion
-                    </button>
-                </li>
+                        @if (getCartItemCount() > 0) {
+                        <span class="cart-counter">{{
+                            getCartItemCount()
+                        }}</span>
+                        }
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-icon" title="Profil">
+                    <!-- SVG Profil -->
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M20.5906 22C20.5906 18.13 16.7406 15 12.0006 15C7.26063 15 3.41063 18.13 3.41063 22"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-secondary" (click)="logout()">
+                    Déconnexion
+                </button>
+            </li>
             }
         </ul>
     </nav>
