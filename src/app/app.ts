@@ -10,6 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginModal } from './modals/login-modal/login-modal';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './interfaces/User';
+import { ProductModal } from './modals/product-modal/product-modal';
 
 @Component({
     selector: 'app-root',
@@ -119,6 +120,13 @@ export class App implements OnInit {
     openLoginModal() {
         this.dialog.open(LoginModal, {
             width: '800px',
+        });
+    }
+
+    openProductModal(product: Product) {
+        this.dialog.open(ProductModal, {
+            width: '1200px',
+            data: product
         });
     }
 }

@@ -31,7 +31,7 @@
 .product-image {
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    object-fit: contain;
     background: #f3f4f6;
 }
 
@@ -41,6 +41,15 @@
 
 .product-name {
     margin-bottom: var(--spacing2);
+}
+
+.product-name.pointer {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.product-name.pointer:hover {
+    color: var(--primary);
 }
 
 .product-price {

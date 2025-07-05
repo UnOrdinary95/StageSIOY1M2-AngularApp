@@ -1,1 +1,85 @@
-<p>product-modal works!</p>
+<div class="product-modal-overlay" (click)="closeModal()">
+    <div class="product-modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title dark bold">{{ product.name }}</h2>
+            <button class="close-btn" (click)="closeModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="product-details">
+                <div class="product-image-container">
+                    <img
+                        [src]="'images/products/' + product.path"
+                        [alt]="product.name"
+                        class="product-modal-image"
+                    />
+                </div>
+
+                <div class="product-info-container">
+                    <div class="product-main-info">
+                        <h3 class="product-name dark bold">{{ product.name }}</h3>
+                        <p class="product-price primary bold">
+                            {{ product.price | currency : "EUR" : "symbol" : "1.2-2" }}
+                        </p>
+
+                        <div class="product-stock flex items-center gap2">
+                            <span
+                                class="stock-indicator"
+                                [class.in-stock]="product.inStock"
+                                [class.out-of-stock]="!product.inStock"
+                            ></span>
+                            <span
+                                class="stock-text"
+                                [class.in-stock]="product.inStock"
+                                [class.out-of-stock]="!product.inStock"
+                            >
+                                {{ product.inStock ? "En stock" : "Rupture de stock" }}
+                            </span>
+                        </div>
+
+                        @if (product.description) {
+                        <div class="product-description">
+                            <h4 class="description-title dark bold">Description</h4>
+                            <p class="description-text dark-secondary">{{ product.description }}</p>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="product-actions-container">
+                        <div class="product-actions flex items-center gap3">
+                            <button
+                                class="add-to-cart-btn btn btn-primary flex-1"
+                                [disabled]="!product.inStock"
+                                (click)="addToCart()"
+                            >
+                                {{ !product.inStock ? "Indisponible" : isInCart() ? "Supprimer du panier" : "Ajouter au panier" }}
+                            </button>
+
+                            <button
+                                class="wishlist-btn pointer"
+                                (click)="addToWishlist()"
+                                [title]="isInWishlist() ? 'Retirer de la wishlist' : 'Ajouter à la wishlist'"
+                            >
+                                <svg
+                                    class="wishlist-icon"
+                                    viewBox="0 0 24 24"
+                                    [style.fill]="isInWishlist() ? '#ff0000' : 'none'"
+                                    [style.stroke]="isInWishlist() ? '#ff0000' : 'currentColor'"
+                                >
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

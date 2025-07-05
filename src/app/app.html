@@ -14,7 +14,7 @@
                     class="product-image"
                 />
                 <div class="product-info">
-                    <h3 class="product-name dark bold">{{ product.name }}</h3>
+                    <h3 class="product-name dark bold pointer" (click)="openProductModal(product)">{{ product.name }}</h3>
                     <p class="product-price primary bold">
                         {{
                             product.price
